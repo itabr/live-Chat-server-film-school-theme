@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chat.apps.ChatConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -74,9 +76,17 @@ WSGI_APPLICATION = 'M117.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'm117',
+        'USER': 'm117',
+        'PASSWORD': 'mypassword',
+        'HOST': 'm117.ckyejmpx5kmy.us-west-2.rds.amazonaws.com',  # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
 
@@ -118,3 +128,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# database
+# m117
+# mypassword
+
+# super user
+# admin
+# mypassword
