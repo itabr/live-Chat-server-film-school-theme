@@ -1,39 +1,43 @@
 <!doctype html>
 <html lang="en">
-
+<link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <head>
     <meta charset="utf-8">
     <title>ChitChat</title>
   </head>
-
   <style>
+    body {
+      font-family: 'Coming Soon', cursive;
+    }
     #header {
         width: 100%;
-        background-color: red;
+        background-color: white;
         height: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center
     }
     #container {
         width: 100%;
-        background-color: #ffcc33;
-        margin: auto;
+        background-color: white;
+        margin-left: 75px;
     }
     #login {
         width: 400px;
         float: left;
-        height: 400px;
-        background-color: #F0F8FF;
-        text-align: center;
-        border: 3px solid #73AD21;
+        height: 250px;
+        border: 3px solid #e7e7e7;
         border-radius: 6px;
+        margin: auto;
     }
     #signup {
         width: 400px;
         float: left;
-        height: 600px;
-        background-color: #F0F8FF;
-        text-align: center;
-        border: 3px solid #73AD21;
+        height: 820px;
+        border: 3px solid #e7e7e7;
         border-radius: 6px;
+        margin: auto;
     }
     #empty {
         width: 10px;
@@ -42,17 +46,211 @@
         background-color: white;
         text-align: center;
     }
+    div.container {
+      display: table;
+      margin: auto;
+    }
+    input.fillin {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 5px 18px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #e7e7e7;
+    }
+
+    .button1:hover {
+        background-color: #e7e7e7;
+        color: white;
+    }
   </style>
+
+  <script>
+    var x = document.getElementById("loc");
+    var location_val = ''
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+      location_val = position.coords.longitude + ',' + position.coords.latitude;
+      document.getElementById("location_vali").value = location_val;
+      document.getElementById("loc").innerHTML = "Latitude: " + position.coords.latitude + '<br>' + "Longitude: " + position.coords.longitude;
+    }
+
+    function getdata(){
+      var first_name=document.getElementById("first_name").value;
+      var last_name=document.getElementById("last_name").value;
+      var user_name=document.getElementById("user_name").value;
+      var password=document.getElementById("password").value;
+      var email=document.getElementById("email").value;
+      var school=document.getElementById("school").value;
+      var Action = document.getElementById("Action").checked;
+      var Adventure = document.getElementById("Adventure").checked;
+      var Animation = document.getElementById("Animation").checked;
+      var Biography = document.getElementById("Biography").checked;
+      var Comedy = document.getElementById("Comedy").checked;
+      var Crime = document.getElementById("Crime").checked;
+      var Documentary = document.getElementById("Documentary").checked;
+      var Drama = document.getElementById("Drama").checked;
+      var Family = document.getElementById("Family").checked;
+      var Fantasy = document.getElementById("Fantasy").checked;
+      var FilmNoir = document.getElementById("FilmNoir").checked;
+      var History = document.getElementById("History").checked;
+      var Horror = document.getElementById("Horror").checked;
+      var Music = document.getElementById("Music").checked;
+      var Musical = document.getElementById("Musical").checked;
+      var Mystery = document.getElementById("Mystery").checked;
+      var Romance = document.getElementById("Romance").checked;
+      var SciFi = document.getElementById("SciFi").checked;
+      var Sport = document.getElementById("Sport").checked;
+      var Thriller = document.getElementById("Thriller").checked;
+      var War = document.getElementById("War").checked;
+      var Western = document.getElementById("Western").checked;
+
+      console.log(first_name);
+      console.log(last_name);
+      console.log(user_name);
+      console.log(password);
+      console.log(email);
+      console.log(school);
+      console.log(location_val);
+      console.log(Action);
+      console.log(Adventure );
+      console.log(Animation );
+      console.log(Biography );
+      console.log(Comedy );
+      console.log(Crime );
+      console.log(Documentary );
+      console.log(Drama );
+      console.log(Family );
+      console.log(Fantasy );
+      console.log(FilmNoir );
+      console.log(History );
+      console.log(Horror );
+      console.log(Music );
+      console.log(Musical );
+      console.log(Mystery );
+      console.log(Romance );
+      console.log(SciFi );
+      console.log(Sport );
+      console.log(Thriller );
+      console.log(War );
+      console.log(Western );
+
+
+    }
+  </script>
+
   <body>
-    <div id="container">
-      <div id="login">
-        <h1> login </h1>
+
+      <div id="header">
+        <h1 style="">Welcome to #ChitChatCity</h1>
       </div>
-      <div id="empty">
+      <br>
+      <div id="container">
+        <!-- This is where the login starts-->
+          <div id="login">
+            <h1 style="text-align: center"> Login </h1>
+            <div class="container">
+              <input class="fillin" type="text" placeholder="Username" name="uname" required>
+              <br>
+              <input class="fillin" type="password" placeholder="Password" name="psw" required>
+              <br><button class="button button1" type="submit">Login</button>
+            </div>
+          </div>
+          <div id="empty">
+          </div>
+        <!-- This is where the signup starts-->
+          <div id="signup">
+            <form id="signup" method="POST">
+              {% csrf_token %}
+              <h1 style="text-align: center"> Sign up </h1>
+              <div class="container">
+                  <input id="first_name" class="fillin" type="text" placeholder="First name" name="fname" required>
+                  <br><input id="last_name" class="fillin" type="text" placeholder="Last name" name="lname" required>
+                  <br><input id="user_name" class="fillin" type="text" placeholder="Username" name="uname" required>
+                  <br><input id="password" class="fillin" type="password" placeholder="Password" name="psw" required>
+                  <br><input id="email" class="fillin" type="text" placeholder="Email" name="email" required>
+                  <br><input id="school" class="fillin" type="text" placeholder="School name" name="school" required>
+                  <br><input id="location_vali" onclick="getLocation()" class="fillin" type="text" placeholder="location" name="location" required>
+                  <p id="loc" style="text-align: center"> Latitude: -- <br> Longitude: -- </p>
+
+                  <div>
+                  <p style="font-weight: bold;"> Choose all movie genres you are interested in :</p>
+                  <table>
+                    <tr>
+                    <td><input id="Action" type="checkbox" name="Action"> Action</td>
+                    <td><input id="Adventure" type="checkbox" name="Adventure"> Adventure</td>
+                    <td><input id="Animation" type="checkbox" name="Animation"> Animation</td>
+                    </tr>
+                    <tr>
+                    <td><input id="Biography" type="checkbox" name="Biography"> Biography</td>
+                    <td><input id="Comedy" type="checkbox" name="Comedy"> Comedy</td>
+                    <td><input id="Crime" type="checkbox" name="Crime"> Crime</td>
+                    </tr>
+                    <tr>
+                    <td><input id="Documentary" type="checkbox" name="Documentary"> Documentary</td>
+                    <td><input id="Drama" type="checkbox" name="Drama"> Drama</td>
+                    <td><input id="Family" type="checkbox" name="Family"> Family</td>
+                    </tr>
+                    <tr>
+                    <td><input id="Fantasy" type="checkbox" name="Fantasy"> Fantasy</td>
+                    <td><input id="FilmNoir" type="checkbox" name="FilmNoir"> FilmNoir</td>
+                    <td><input id="History" type="checkbox" name="History"> History</td>
+                    </tr>
+                    <tr>
+                    <td><input id="Horror" type="checkbox" name="Horror"> Horror</td>
+                    <td><input id="Music" type="checkbox" name="Music"> Music</td>
+                    <td><input id="Musical" type="checkbox" name="Musical"> Musical</td>
+                    </tr>
+                    <tr>
+                    <td><input id="Mystery" type="checkbox" name="Mystery"> Mystery</td>
+                    <td><input id="Romance" type="checkbox" name="Romance"> Romance</td>
+                    <td><input id="SciFi" type="checkbox" name="SciFi"> SciFic</td>
+                    </tr>
+                    <tr>
+                    <td><input id="Sport" type="checkbox" name="Sport"> Sport</td>
+                    <td><input id="Thriller" type="checkbox" name="Thriller"> Thriller</td>
+                    <td><input id="War" type="checkbox" name="War"> War</td>
+                    </tr>
+                    <tr>
+                    <td></td>
+                    <td><input id="Western" type="checkbox" name="Western"> Western</td>
+                    <td></td>
+                    </tr>
+                  </table>
+                  <br><button class="button button1" type="submit" onclick="getdata()" >submit</button>
+                  </div>
+                </div>
+            </form>
+          </div>
+
       </div>
-      <div id="signup">
-        <h1> sign up </h1>
-      </div>
-    </div>
-  </body>
+</body>
 </html>
