@@ -10,6 +10,8 @@ def ontoone(value):
 		value=0
 	return value
 
+
+# /chat
 def chathome(request):
 	if request.method == "POST":
 		try:
@@ -61,5 +63,26 @@ def chathome(request):
 
 	return render(request,'chat/home.html')
 
+
+#/chat/{{username}}
 def user_home_page(request,user_name):
-	return render(request,'chat/user_home_page.html')
+	data = User.objects.get(user_name=user_name)
+
+	print(data.first_name)
+
+	context = {
+		'fname' : data.first_name,
+		'lname' : data.last_name,
+		'school' : data.school
+    }
+
+	return render(request,'chat/user_home_page.html', context)
+
+
+def action(request,user_name):
+
+	context = {
+		'lname' : user_name,
+    }
+
+	return render(request,'chat/action.html', context)
