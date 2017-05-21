@@ -67,22 +67,21 @@ def chathome(request):
 #/chat/{{username}}
 def user_home_page(request,user_name):
 	data = User.objects.get(user_name=user_name)
-
 	print(data.first_name)
 
 	context = {
 		'fname' : data.first_name,
 		'lname' : data.last_name,
+		'uname' : data.user_name,
 		'school' : data.school
     }
 
 	return render(request,'chat/user_home_page.html', context)
 
 
-def action(request,user_name):
-
+def chatrooms(request,chatrooms,user_name):
 	context = {
-		'lname' : user_name,
+		'uname' : user_name,
+		'chatroom_name' : chatrooms.title(),
     }
-
-	return render(request,'chat/action.html', context)
+	return render(request,'chat/chatrooms.html', context)

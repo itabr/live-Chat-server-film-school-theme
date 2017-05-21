@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <head>
+    <meta charset="utf-8">
+    <title>ChitChat</title>
+  </head>
+     <style>
+          .msg-wrap
+          {
+             padding:10px;
+             min-height: 400px;
+             max-height: 400px;
+             overflow: scroll;
+             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9eed7+0,e1c48b+50,dcba76+51,f5e6c7+100 */
+               background: rgb(249,238,215); /* Old browsers */
+               background: -moz-linear-gradient(top, rgba(249,238,215,1) 0%, rgba(225,196,139,1) 50%, rgba(220,186,118,1) 51%, rgba(245,230,199,1) 100%); /* FF3.6-15 */
+               background: -webkit-linear-gradient(top, rgba(249,238,215,1) 0%,rgba(225,196,139,1) 50%,rgba(220,186,118,1) 51%,rgba(245,230,199,1) 100%); /* Chrome10-25,Safari5.1-6 */
+               background: linear-gradient(to bottom, rgba(249,238,215,1) 0%,rgba(225,196,139,1) 50%,rgba(220,186,118,1) 51%,rgba(245,230,199,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9eed7', endColorstr='#f5e6c7',GradientType=0 ); /* IE6-9 */
+          }
+          .newmessages{
+              color: black;
+              font-size: 18px;
+          }
+          .userclass{
+              color: gray;
+              float: left;
+              clear: both;
+          }
+          .messageclass{
+              color: black;
+              float: left;
+              display: inline;
+              clear: both;
+          }
+
+          .major{
+               /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a90329+0,8f0222+44,6d0019+100;Brown+Red+3D */
+               background: rgb(169,3,41); /* Old browsers */
+               background: -moz-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%); /* FF3.6-15 */
+               background: -webkit-linear-gradient(top, rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* Chrome10-25,Safari5.1-6 */
+               background: linear-gradient(to bottom, rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+          }
+     </style>
+
+     <script>
+          var uname = "{{uname|safe}}";
+
+          socket = new WebSocket("ws://" + window.location.host + "/Action/");
+
+          socket.onmessage = function(e) {
+               userdata = JSON.parse(e.data);
+               name = userdata.name;
+               text = userdata.text;
+
+               newmessage =  '<div class="userclass">' + name + ':<span style="color: black"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span></div>'
+               $( ".msg-wrap" ).append(newmessage);
+               console.log(text);
+          }
+
+
+          function myFunction(){
+               socket.onopen = function() {
+                    data = document.getElementById("usermessage").value;
+                    if(data.length>0){
+                         document.getElementById("usermessage").value = '';
+                         var message = '[' + '"' +uname  + '"' + ','  + '"' + data  + '"' + ']';
+                         socket.send(message.replace(/\r?\n|\r/g, "@@"));
+                    }
+               }
+
+
+          // Call onopen directly if socket is already open
+          if (socket.readyState == WebSocket.OPEN) socket.onopen();
+          }
+
+     </script>
+     <body class="major">
+          <h1>Welcome to {{chatroom_name}} Page </h1>
+          <div>
+               <div>
+                    <div class="msg-wrap" style="color: gray; border: 2px solid; border-radius: 7px;">
+                         <div class="newmessages">
+                         </div>
+                    </div>
+               </div>
+                    <br>
+          <div>
+               <textarea id="usermessage" placeholder="Write a reply..." style="float: left; width: 75%; height: 75px; font-size: 18px;"></textarea>
+               <button onclick="myFunction()" type="submit" style="border: 2px solid; border-radius: 7px; margin: 0px 10px 10px 10px; width: 100px; height: 81px; font-size: 18px;">send</button>
+          </div>
+     </body>
+</html>
