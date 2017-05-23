@@ -1,5 +1,6 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
+from django.core import serializers
 from .models import *
 # Create your views here.
 
@@ -82,6 +83,7 @@ def user_home_page(request,user_name):
 def chatrooms(request,chatrooms,user_name):
 	context = {
 		'uname' : user_name,
+		'old_messages': serializers.serialize("json",Action.objects.all()),
 		'chatroom_name' : chatrooms.title(),
     }
 	return render(request,'chat/chatrooms.html', context)

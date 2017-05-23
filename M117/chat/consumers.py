@@ -2,7 +2,7 @@ from channels import Group
 import json
 from django.core.serializers import serialize
 import re
-
+from .models import *
 # Connected to websocket.connect
 def ws_add(message):
     chatroom = re.sub('/', '', message.content['path'])
@@ -14,7 +14,7 @@ def ws_add(message):
 # Connected to websocket.receive
 def ws_message(message):
     data = eval(message.content['text'])
-
+    action = Action.objects.create(first_name = data[0],text = data[1],)
     Group("Action").send({
         "text": json.dumps({"name" : data[0],"text" : data[1]})
     })

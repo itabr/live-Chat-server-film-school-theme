@@ -32,3 +32,8 @@ class User(models.Model):
     Thriller = models.IntegerField( default= 0 )
     War = models.IntegerField( default= 0 )
     Western = models.IntegerField( default= 0 )
+
+class Action(models.Model):
+    ID = models.AutoField(db_column='ID', primary_key=True)
+    first_name = models.CharField(max_length=50)
+    text = models.TextField()

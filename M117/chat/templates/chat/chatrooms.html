@@ -82,11 +82,24 @@
           <div>
                <div>
                     <div class="msg-wrap" style="color: gray; border: 2px solid; border-radius: 7px;">
-                         <div class="newmessages">
-                         </div>
+                              <script>
+                                   var old_data = "{{old_messages|escapejs}}";
+                                   old_data = JSON.parse(old_data);
+                                   console.log(old_data);
+
+                                   for(i = 0; i<old_data.length; i++){
+                                        name = old_data[i].fields.first_name;
+                                        text = old_data[i].fields.text;
+
+
+                                        newmessage =  '<div class="userclass">' + name + ':<span style="color: black"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span></div>'
+                                        $( ".msg-wrap" ).append(newmessage);
+                                   }
+
+                              </script>
                     </div>
                </div>
-                    <br>
+               <br>
           <div>
                <textarea id="usermessage" placeholder="Write a reply..." style="float: left; width: 75%; height: 75px; font-size: 18px;"></textarea>
                <button onclick="myFunction()" type="submit" style="border: 2px solid; border-radius: 7px; margin: 0px 10px 10px 10px; width: 100px; height: 81px; font-size: 18px;">send</button>
