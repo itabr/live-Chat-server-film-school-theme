@@ -46,6 +46,7 @@
      </style>
 
      <script>
+
           var uname = "{{uname|safe}}";
 
           socket = new WebSocket("ws://" + window.location.host + "/Action/");
@@ -54,19 +55,23 @@
                userdata = JSON.parse(e.data);
                name = userdata.name;
                text = userdata.text;
+               time = userdata.time;
 
-               newmessage =  '<div class="userclass">' + name + ':<span style="color: black"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span></div>'
+               newmessage =  '<div class="userclass">' + name + ':<span style="color: black"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span>' + '<span style="color: blue"><br>' + time + '</span></div>'
                $( ".msg-wrap" ).append(newmessage);
                console.log(text);
           }
 
 
           function myFunction(){
+               var currentdate = new Date();
+               var datetime =  currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear() + " @ " + currentdate.getHours() + ":"+ currentdate.getMinutes() + ":" + currentdate.getSeconds();
+
                socket.onopen = function() {
                     data = document.getElementById("usermessage").value;
                     if(data.length>0){
                          document.getElementById("usermessage").value = '';
-                         var message = '[' + '"' +uname  + '"' + ','  + '"' + data  + '"' + ']';
+                         var message = '[' + '"' +uname  + '"' + ','  + '"' + data  + '"' + ','  + '"' + datetime  + '"' + ']';
                          socket.send(message.replace(/\r?\n|\r/g, "@@"));
                     }
                }
@@ -90,9 +95,8 @@
                                    for(i = 0; i<old_data.length; i++){
                                         name = old_data[i].fields.first_name;
                                         text = old_data[i].fields.text;
-
-
-                                        newmessage =  '<div class="userclass">' + name + ':<span style="color: black"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span></div>'
+                                        time = old_data[i].fields.time;
+                                        newmessage =  '<div class="userclass">' + name + ':<span style="color: black"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span>' + '<span style="color: blue"><br>' + time + '</span></div>'
                                         $( ".msg-wrap" ).append(newmessage);
                                    }
 

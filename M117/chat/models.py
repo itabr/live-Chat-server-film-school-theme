@@ -37,3 +37,4 @@ class Action(models.Model):
     ID = models.AutoField(db_column='ID', primary_key=True)
     first_name = models.CharField(max_length=50)
     text = models.TextField()
+    time = models.CharField(max_length=500,default='')

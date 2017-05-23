@@ -81,9 +81,12 @@ def user_home_page(request,user_name):
 
 
 def chatrooms(request,chatrooms,user_name):
+
+	old_messages = eval(chatrooms.title() + ".objects.all()")
+
 	context = {
 		'uname' : user_name,
-		'old_messages': serializers.serialize("json",Action.objects.all()),
+		'old_messages': serializers.serialize("json",old_messages),
 		'chatroom_name' : chatrooms.title(),
     }
 	return render(request,'chat/chatrooms.html', context)

@@ -13,12 +13,19 @@ def ws_add(message):
 
 # Connected to websocket.receive
 def ws_message(message):
+
+    chatroom = re.sub('/', '', message.content['path'])
     data = eval(message.content['text'])
-    action = Action.objects.create(first_name = data[0],text = data[1],)
-    Group("Action").send({
-        "text": json.dumps({"name" : data[0],"text" : data[1]})
+
+    command =  chatroom + ".objects.create(first_name = data[0],text = data[1],time = data[2])"
+
+    eval(command)
+
+    Group(chatroom).send({
+        "text": json.dumps({"name" : data[0],"text" : data[1],'time':data[2]})
     })
 
 # Connected to websocket.disconnect
 def ws_disconnect(message):
-    Group("Action").discard(message.reply_channel)
+    chatroom = re.sub('/', '', message.content['path'])
+    Group(chatroom).discard(message.reply_channel)
