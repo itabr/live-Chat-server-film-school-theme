@@ -68,18 +68,21 @@ def chathome(request):
 #/chat/{{username}}
 def user_home_page(request,user_name):
 	data = User.objects.get(user_name=user_name)
-	print(data.first_name)
+	data.state = 1
+	data.save()
+	other_users = User.objects.exclude(user_name=user_name)
 
 	context = {
 		'fname' : data.first_name,
 		'lname' : data.last_name,
 		'uname' : data.user_name,
-		'school' : data.school
+		'school' : data.school,
+		'all_user' : serializers.serialize("json",other_users)
     }
 
 	return render(request,'chat/user_home_page.html', context)
 
-
+#/chat/{{chatrooms}}/{{username}}
 def chatrooms(request,chatrooms,user_name):
 
 	old_messages = eval(chatrooms.title() + ".objects.all()")
@@ -90,3 +93,12 @@ def chatrooms(request,chatrooms,user_name):
 		'chatroom_name' : chatrooms.title(),
     }
 	return render(request,'chat/chatrooms.html', context)
+
+
+def privatechat(request, token,user_name):
+
+	context = {
+		'token' : token,
+		'uname': user_name
+    }
+	return render(request,'chat/private.html', context)

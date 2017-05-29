@@ -7,13 +7,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-     <div style=" margin: 10px; border: 3px solid; border-radius: 10px; height: 500px;">
+     <div style=" margin: 10px; border: 3px solid; border-radius: 10px; min-height: 400px;">
           <div style=" margin: 10px;">
                <h1> Hi {{fname}} </h1>
                <h2> Welcome to #ChitChatCity homepage! </h1>
                <h3> Choose the ChatRoom you want to join :</h3>
                <div>
-                    <div class="dropdown" style="width: 725px;">
+                    <div style="width: 725px;">
                          <a href="../Action/{{uname}}">
                               <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Action</h4>
@@ -127,5 +127,52 @@
                     </div>
                </div>
           </div>
+
+          <div  style="clear: both; margin:10px; padding-top: 10px;">
+               <h3> Click on user to start private converstation</h3>
+               <div id="all-users" style="font-size: 18px;">
+               </div>
+               <script>
+
+                    function toHex(str) {
+                    	var hex = '';
+                    	for(var i=0;i<str.length;i++) {
+                    		hex += ''+str.charCodeAt(i).toString(16);
+                    	}
+                    	return hex;
+                    }
+
+
+                    function addHexColor(c1, c2) {
+                      var hexStr = (parseInt(c1, 16) + parseInt(c2, 16)).toString(16);
+                      while (hexStr.length < 6) { hexStr = '0' + hexStr; } // Zero pad.
+                      return hexStr;
+                    }
+
+                    var all_users = JSON.parse("{{all_user|escapejs}}");
+                    var str = "";
+                    uname = "{{uname}}";
+
+                    for(i=0; i<all_users.length; i++){
+                         new_uname = all_users[i]["fields"]["user_name"];
+                         first_name = all_users[i]["fields"]["first_name"];
+                         last_name = all_users[i]["fields"]["last_name"];
+                         str = str + "<a href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'><li>" + first_name + " " + last_name + "</li>";
+                    }
+
+                    document.getElementById("all-users").innerHTML = str;
+
+               </script>
+          </div>
      </div>
+
+
+<script type="text/javascript">
+     
+     $(window).on("unload", function(e) {
+         console.log("this will be triggered");
+     });
+
+</script>
+
 </body>

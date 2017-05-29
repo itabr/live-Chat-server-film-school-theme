@@ -1,23 +1,23 @@
 <!doctype html>
 <html lang="en">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
   <head>
     <meta charset="utf-8">
     <title>ChitChat</title>
   </head>
      <style>
-          .msg-wrap
-          {
+          .msg-wrap{
              padding:10px;
              min-height: 400px;
              max-height: 400px;
              overflow: scroll;
-             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedbe9+0,aac5de+15,3a84c3+32,6199c7+46,419ad6+59,4bb8f0+70,26558b+92 */
-          background: rgb(206,219,233); /* Old browsers */
-          background: -moz-radial-gradient(center, ellipse cover, rgba(206,219,233,1) 0%, rgba(170,197,222,1) 15%, rgba(58,132,195,1) 32%, rgba(97,153,199,1) 46%, rgba(65,154,214,1) 59%, rgba(75,184,240,1) 70%, rgba(38,85,139,1) 92%); /* FF3.6-15 */
-          background: -webkit-radial-gradient(center, ellipse cover, rgba(206,219,233,1) 0%,rgba(170,197,222,1) 15%,rgba(58,132,195,1) 32%,rgba(97,153,199,1) 46%,rgba(65,154,214,1) 59%,rgba(75,184,240,1) 70%,rgba(38,85,139,1) 92%); /* Chrome10-25,Safari5.1-6 */
-          background: radial-gradient(ellipse at center, rgba(206,219,233,1) 0%,rgba(170,197,222,1) 15%,rgba(58,132,195,1) 32%,rgba(97,153,199,1) 46%,rgba(65,154,214,1) 59%,rgba(75,184,240,1) 70%,rgba(38,85,139,1) 92%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedbe9', endColorstr='#26558b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9eed7+0,e1c48b+50,dcba76+51,f5e6c7+100 */
+               background: rgb(249,238,215); /* Old browsers */
+               background: -moz-linear-gradient(top, rgba(249,238,215,1) 0%, rgba(225,196,139,1) 50%, rgba(220,186,118,1) 51%, rgba(245,230,199,1) 100%); /* FF3.6-15 */
+               background: -webkit-linear-gradient(top, rgba(249,238,215,1) 0%,rgba(225,196,139,1) 50%,rgba(220,186,118,1) 51%,rgba(245,230,199,1) 100%); /* Chrome10-25,Safari5.1-6 */
+               background: linear-gradient(to bottom, rgba(249,238,215,1) 0%,rgba(225,196,139,1) 50%,rgba(220,186,118,1) 51%,rgba(245,230,199,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9eed7', endColorstr='#f5e6c7',GradientType=0 ); /* IE6-9 */
           }
           .newmessages{
               color: black;
@@ -34,14 +34,21 @@
               display: inline;
               clear: both;
           }
-
+          .major{
+               /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a90329+0,8f0222+44,6d0019+100;Brown+Red+3D */
+               background: rgb(169,3,41); /* Old browsers */
+               background: -moz-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%); /* FF3.6-15 */
+               background: -webkit-linear-gradient(top, rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* Chrome10-25,Safari5.1-6 */
+               background: linear-gradient(to bottom, rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+          }
      </style>
 
      <script>
 
           var uname = "{{uname|safe}}";
 
-          var chatroom_name = "{{chatroom_name}}";
+          var chatroom_name = "private/"+ "{{token}}";
           socket = new WebSocket("ws://" + window.location.host + "/" +chatroom_name + "/");
 
           socket.onmessage = function(e) {
@@ -54,7 +61,6 @@
                $( ".msg-wrap" ).append(newmessage);
                console.log(text);
           }
-
 
           function myFunction(){
                var currentdate = new Date();
@@ -69,14 +75,13 @@
                     }
                }
 
-
           // Call onopen directly if socket is already open
           if (socket.readyState == WebSocket.OPEN) socket.onopen();
           }
 
      </script>
      <body class="major">
-          <h1>Welcome to {{chatroom_name}} Page </h1>
+          <h1> Private Chat </h1>
           <div>
                <div>
                     <div class="msg-wrap" style="color: gray; border: 2px solid; border-radius: 7px;">

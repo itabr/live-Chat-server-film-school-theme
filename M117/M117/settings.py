@@ -77,20 +77,18 @@ WSGI_APPLICATION = 'M117.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'm117',
-        'USER': 'm117',
-        'PASSWORD': 'mypassword',
-        'HOST': 'm117.ckyejmpx5kmy.us-west-2.rds.amazonaws.com',  # Or an IP Address that your DB is hosted on
+        'NAME': 'db_m117',
+        'USER': 'root',
+        'PASSWORD': 'samir1',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
-            'charset': 'utf8mb4',
-        },
+              'charset': 'utf8mb4',
+          },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
