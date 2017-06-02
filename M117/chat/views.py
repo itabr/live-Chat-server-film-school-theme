@@ -71,6 +71,10 @@ def user_home_page(request,user_name):
 	data.state = 1
 	data.save()
 	other_users = User.objects.exclude(user_name=user_name)
+	if request.method == "POST":
+		data.state = 0
+		data.save()
+		return HttpResponse("You're logged out.")
 
 	context = {
 		'fname' : data.first_name,
