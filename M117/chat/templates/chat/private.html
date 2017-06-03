@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </script>
   <head>
@@ -7,26 +8,32 @@
     <title>ChitChat</title>
   </head>
      <style>
-          .msg-wrap{
+
+          .msg-wrap
+          {
              padding:10px;
              min-height: 400px;
              max-height: 400px;
              overflow: scroll;
-             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9eed7+0,e1c48b+50,dcba76+51,f5e6c7+100 */
-               background: rgb(249,238,215); /* Old browsers */
-               background: -moz-linear-gradient(top, rgba(249,238,215,1) 0%, rgba(225,196,139,1) 50%, rgba(220,186,118,1) 51%, rgba(245,230,199,1) 100%); /* FF3.6-15 */
-               background: -webkit-linear-gradient(top, rgba(249,238,215,1) 0%,rgba(225,196,139,1) 50%,rgba(220,186,118,1) 51%,rgba(245,230,199,1) 100%); /* Chrome10-25,Safari5.1-6 */
-               background: linear-gradient(to bottom, rgba(249,238,215,1) 0%,rgba(225,196,139,1) 50%,rgba(220,186,118,1) 51%,rgba(245,230,199,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9eed7', endColorstr='#f5e6c7',GradientType=0 ); /* IE6-9 */
+             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,7db9e8+100&1+0,1+0,1+0,1+0,0.7+0,1+0,1+0,1+0,1+1,0.7+4,0+100 */
+			background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(31,88,154,1) 1%, rgba(34,91,156,0.7) 4%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(31,88,154,1) 1%,rgba(34,91,156,0.7) 4%,rgba(125,185,232,0) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(31,88,154,1) 1%,rgba(34,91,156,0.7) 4%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
           }
           .newmessages{
               color: black;
               font-size: 18px;
           }
           .userclass{
-              color: gray;
+              color: purple;
               float: left;
               clear: both;
+              border: 5px solid white;
+              background-color: white;
+              border-radius: 10px;
+              margin: 5px
+
           }
           .messageclass{
               color: black;
@@ -34,38 +41,31 @@
               display: inline;
               clear: both;
           }
-          .major{
-               /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a90329+0,8f0222+44,6d0019+100;Brown+Red+3D */
-               background: rgb(169,3,41); /* Old browsers */
-               background: -moz-linear-gradient(top, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%); /* FF3.6-15 */
-               background: -webkit-linear-gradient(top, rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* Chrome10-25,Safari5.1-6 */
-               background: linear-gradient(to bottom, rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
-          }
+
      </style>
 
      <script>
-
           var uname = "{{uname|safe}}";
-
           var chatroom_name = "private/"+ "{{token}}";
           socket = new WebSocket("ws://" + window.location.host + "/" +chatroom_name + "/");
-
           socket.onmessage = function(e) {
                userdata = JSON.parse(e.data);
                name = userdata.name;
                text = userdata.text;
                time = userdata.time;
+               if(uname == name){
+                    newmessage =  '<div class="userclass" style="float:right; background-color: #D1EEFC; border: 5px solid #D1EEFC;">' + name + ':<span style="color: black; font-size: 20px;"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span>' + '<span style="color: gray; font-size: 14px;"><br>' + time + '</span></div>';
+               }
+               else{
+                    newmessage =  '<div class="userclass">' + name + ':<span style="color: black; font-size: 20px;"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span>' + '<span style="color: gray; font-size: 14px;"><br>' + time + '</span></div>';
+               }
 
-               newmessage =  '<div class="userclass">' + name + ':<span style="color: black"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span>' + '<span style="color: blue"><br>' + time + '</span></div>'
                $( ".msg-wrap" ).append(newmessage);
                console.log(text);
           }
-
           function myFunction(){
                var currentdate = new Date();
                var datetime =  currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear() + " @ " + currentdate.getHours() + ":"+ currentdate.getMinutes() + ":" + currentdate.getSeconds();
-
                socket.onopen = function() {
                     data = document.getElementById("usermessage").value;
                     if(data.length>0){
@@ -74,37 +74,25 @@
                          socket.send(message.replace(/\r?\n|\r/g, "@@"));
                     }
                }
-
           // Call onopen directly if socket is already open
           if (socket.readyState == WebSocket.OPEN) socket.onopen();
           }
-
      </script>
-     <body class="major">
-          <h1> Private Chat </h1>
-          <div>
+     {% load static %}
+     <body background="{% static "/chat/img/private.png" %}"  style=" background-size: 100% 100%;">
                <div>
-                    <div class="msg-wrap" style="color: gray; border: 2px solid; border-radius: 7px;">
-                              <script>
-                                   var old_data = "{{old_messages|escapejs}}";
-                                   old_data = JSON.parse(old_data);
-                                   console.log(old_data);
-
-                                   for(i = 0; i<old_data.length; i++){
-                                        name = old_data[i].fields.first_name;
-                                        text = old_data[i].fields.text;
-                                        time = old_data[i].fields.time;
-                                        newmessage =  '<div class="userclass">' + name + ':<span style="color: black"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span>' + '<span style="color: blue"><br>' + time + '</span></div>'
-                                        $( ".msg-wrap" ).append(newmessage);
-                                   }
-
-                              </script>
+			   <h1 style="color: darkblue ;float: center"> Private Chat </h1>
+             </div>
+               <div>
+                    <div class="msg-wrap" style= "color: gray; border: 2px solid; border-radius: 7px;">
                     </div>
                </div>
                <br>
           <div>
-               <textarea id="usermessage" placeholder="Write a reply..." style="float: left; width: 75%; height: 75px; font-size: 18px;"></textarea>
-               <button onclick="myFunction()" type="submit" style="border: 2px solid; border-radius: 7px; margin: 0px 10px 10px 10px; width: 100px; height: 81px; font-size: 18px;">send</button>
-          </div>
+               <input id="usermessage" placeholder="Write a message ..." style=" padding: 10px; float: left; margin: 20px 13px 13px 11px; width: 64%; border: 5px solid;border-color: gray; border-radius: 7px; font-size: 28px;"></input>
+               <button onclick="myFunction()" type="submit" style="padding: 10px; border: 5px solid; border-radius: 7px; margin: 20px; background-color: white; color: #1D77EF; font-size: 28px; font-weight: bold;">
+			   Send
+			   </button>
+			   </div>
      </body>
 </html>

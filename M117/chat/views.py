@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from django.core import serializers
 from .models import *
+import json
 # Create your views here.
 
 def ontoone(value):
@@ -70,6 +71,7 @@ def user_home_page(request,user_name):
 	data = User.objects.get(user_name=user_name)
 	data.state = 1
 	data.save()
+
 	other_users = User.objects.exclude(user_name=user_name)
 	if request.method == "POST":
 		data.state = 0
@@ -81,6 +83,7 @@ def user_home_page(request,user_name):
 		'lname' : data.last_name,
 		'uname' : data.user_name,
 		'school' : data.school,
+		'myself' : serializers.serialize("json",[data,]),
 		'all_user' : serializers.serialize("json",other_users)
     }
 
@@ -106,3 +109,6 @@ def privatechat(request, token,user_name):
 		'uname': user_name
     }
 	return render(request,'chat/private.html', context)
+
+def test(request):
+	return render(request,'chat/test.html')

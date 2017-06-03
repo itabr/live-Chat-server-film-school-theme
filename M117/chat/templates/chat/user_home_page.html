@@ -156,6 +156,77 @@ button{
                <div id="all-users" class="all-users" style="font-size: 18px;">
                </div>
                <script>
+                    function compare(foo1,foo2){
+                         var count = 0;
+                         if( foo1["fields"]["Action"] === foo2["fields"]["Action"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Adventure"] === foo2["fields"]["Adventure"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Animation"] === foo2["fields"]["Animation"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Biography"] === foo2["fields"]["Biography"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Comedy"] === foo2["fields"]["Comedy"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Crime"] === foo2["fields"]["Crime"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Documentary"] === foo2["fields"]["Documentary"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Drama"] === foo2["fields"]["Drama"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Family"] === foo2["fields"]["Family"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Fantasy"] === foo2["fields"]["Fantasy"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["FilmNoir"] === foo2["fields"]["FilmNoir"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["History"] === foo2["fields"]["History"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Horror"] === foo2["fields"]["Horror"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Music"] === foo2["fields"]["Music"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Musical"] === foo2["fields"]["Musical"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Mystery"] === foo2["fields"]["Mystery"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Romance"] === foo2["fields"]["Romance"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["SciFi"] === foo2["fields"]["SciFi"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Sport"] === foo2["fields"]["Sport"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Thriller"] === foo2["fields"]["Thriller"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["War"] === foo2["fields"]["War"] ){
+                              count = count + 1;
+                         }
+                         if( foo1["fields"]["Western"] === foo2["fields"]["Western"] ){
+                              count = count + 1;
+                         }
+
+                         return count;
+                    }
 
                     function toHex(str) {
                     	var hex = '';
@@ -172,26 +243,42 @@ button{
                       return hexStr;
                     }
 
+                    function sortlist(l1){
+                         console.log(l1)
+                    }
+
+                    var myself = JSON.parse("{{myself|escapejs}}")[0];
+
                     var all_users = JSON.parse("{{all_user|escapejs}}");
                     var str = "";
                     uname = "{{uname}}";
                     document.getElementById("all-users").innerHTML = "";
-                         for(i=0; i<all_users.length; i++){
-                              new_uname = all_users[i]["fields"]["user_name"];
-                              first_name = all_users[i]["fields"]["first_name"];
-                              last_name = all_users[i]["fields"]["last_name"];
-                              state = parseInt(all_users[i]["fields"]["state"]);
 
-                              if(state){
-                                   str = str + "<a href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'><li style='color: #3cba54;'>" + first_name + " " + last_name + "</li>";
-                              }
-                              else{
-                                   str = str + "<a href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'><li style='color: #db3236;'>" + first_name + " " + last_name + "</li>";
-                              }
+                    newlist = []
+
+                    for(i=0; i<all_users.length; i++){
+                         compare(myself,all_users[i])
+                         newlist.push(all_users[i])
+                    }
+
+                    sortlist(newlist)
+
+                    for(i=0; i<all_users.length; i++){
+
+                         new_uname = all_users[i]["fields"]["user_name"];
+                         first_name = all_users[i]["fields"]["first_name"];
+                         last_name = all_users[i]["fields"]["last_name"];
+                         state = parseInt(all_users[i]["fields"]["state"]);
+
+                         if(state){
+                              str = str + "<a href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'><li style='color: #3cba54;'>" + first_name + " " + last_name + "</li>";
                          }
+                         else{
+                              str = str + "<a href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'><li style='color: #db3236;'>" + first_name + " " + last_name + "</li>";
+                         }
+                    }
 
-                         document.getElementById("all-users").innerHTML = str;
-
+                    document.getElementById("all-users").innerHTML = str;
                </script>
           </div>
      </div>

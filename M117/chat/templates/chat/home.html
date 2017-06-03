@@ -1,15 +1,14 @@
 <!doctype html>
 <html lang="en">
 <link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <head>
     <meta charset="utf-8">
     <title>ChitChat</title>
   </head>
   <style>
-    body {
-      font-family: 'Coming Soon', cursive;
-    }
+
     #header {
         width: 100%;
         background-color: white;
@@ -34,7 +33,7 @@
     #signup {
         width: 400px;
         float: left;
-        height: 820px;
+        height: 620px;
         border: 3px solid #e7e7e7;
         border-radius: 6px;
         margin: auto;
@@ -84,6 +83,15 @@
         background-color: #e7e7e7;
         color: white;
     }
+
+
+       #map {
+        width: 400px;
+        height: 300px;
+        position: fixed;
+        float: left;
+       }
+
   </style>
 
   <script>
@@ -96,12 +104,66 @@
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
+    var location_val = "";
 
     function showPosition(position) {
+
       location_val = position.coords.longitude + ',' + position.coords.latitude;
       document.getElementById("location_vali").value = location_val;
-      document.getElementById("loc").innerHTML = "Latitude: " + position.coords.latitude + '<br>' + "Longitude: " + position.coords.longitude;
+
     }
+
+
+
+
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 0, lng: 0},
+          zoom: 10
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('You are here!');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+
+
+
+
+
+
+
+
 
     function getdata(){
       var first_name=document.getElementById("first_name").value;
@@ -133,52 +195,25 @@
       var War = document.getElementById("War").checked;
       var Western = document.getElementById("Western").checked;
 
-     //  console.log(first_name);
-     //  console.log(last_name);
-     //  console.log(user_name);
-     //  console.log(password);
-     //  console.log(email);
-     //  console.log(school);
-     //  console.log(location_val);
-     //  console.log(Action);
-     //  console.log(Adventure );
-     //  console.log(Animation );
-     //  console.log(Biography );
-     //  console.log(Comedy );
-     //  console.log(Crime );
-     //  console.log(Documentary );
-     //  console.log(Drama );
-     //  console.log(Family );
-     //  console.log(Fantasy );
-     //  console.log(FilmNoir );
-     //  console.log(History );
-     //  console.log(Horror );
-     //  console.log(Music );
-     //  console.log(Musical );
-     //  console.log(Mystery );
-     //  console.log(Romance );
-     //  console.log(SciFi );
-     //  console.log(Sport );
-     //  console.log(Thriller );
-     //  console.log(War );
-     //  console.log(Western );
-
-
     }
   </script>
 
-  <body>
 
+  <script>
+  getLocation();
+  </script>
+
+  <body>
       <div id="header">
-        <h1 style="">Welcome to #ChitChatCity</h1>
+        <h1 style="min-width: 1000px;">Welcome to #ChitChatCity</h1>
       </div>
       <br>
-      <div id="container">
+      <div id="container" style="min-width: 1000px;">
         <!-- This is where the login starts-->
-          <div id="login">
+          <div>
                <form id="login" method="POST">
                     {% csrf_token %}
-                    <h1 style="text-align: center"> Login </h1>
+                    <h1 style="text-align: center;"> Login </h1>
                          <div class="container">
                                    <input class="fillin" type="text" placeholder="Username" name="uname" required>
                                    <br>
@@ -186,12 +221,21 @@
                                    <br>
                                    <button class="button button1" type="submit">Login</button>
                     </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div id="map"></div>
+                    <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpC42p6pIWPmJKrsQ-INth3stt4AIE2TE&callback=initMap">
+                    </script>
                </form>
+
           </div>
           <div id="empty">
           </div>
         <!-- This is where the signup starts-->
-          <div id="signup">
+          <div>
             <form id="signup" method="POST">
               {% csrf_token %}
               <h1 style="text-align: center"> Sign up </h1>
@@ -202,9 +246,7 @@
                   <br><input id="password" class="fillin" type="password" placeholder="Password" name="psw" required>
                   <br><input id="email" class="fillin" type="text" placeholder="Email" name="email" required>
                   <br><input id="school" class="fillin" type="text" placeholder="School name" name="school" required>
-                  <br><input id="location_vali" onclick="getLocation()" class="fillin" type="text" placeholder="location" name="location" required>
-                  <p id="loc" style="text-align: center"> Latitude: -- <br> Longitude: -- </p>
-
+                  <br><input style="display:none;" id="location_vali" onclick="getLocation()" class="fillin" type="text" placeholder="location" name="location" required>
                   <div>
                   <p style="font-weight: bold;"> Choose all movie genres you are interested in :</p>
                   <table>
@@ -256,5 +298,17 @@
           </div>
 
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

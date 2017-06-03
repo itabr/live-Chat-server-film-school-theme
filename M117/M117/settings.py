@@ -138,6 +138,7 @@ CHANNEL_LAYERS = {
         "ROUTING": "M117.routing.channel_routing",
     },
 }
+STATIC_URL = '/static/'
 
 # database
 # m117
