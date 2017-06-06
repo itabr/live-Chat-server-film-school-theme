@@ -5,7 +5,7 @@
 {% load static %}
   <head>
     <meta charset="utf-8">
-    <title>ChitChat</title>
+    <title>#ChitChatCity</title>
   </head>
      <style>
           .msg-wrap
@@ -31,14 +31,16 @@
               border: 5px solid white;
               background-color: white;
               border-radius: 10px;
-              margin: 5px
-
+              margin: 5px;
+              min-width: 200px;
           }
           .messageclass{
               color: black;
               float: left;
               display: inline;
               clear: both;
+              min-width: 200px;
+
           }
      </style>
 
@@ -51,7 +53,7 @@
                name = userdata.name;
                text = userdata.text;
                time = userdata.time;
-               newmessage =  '<div class="userclass">' + name + ':<span style="color: black; font-size: 20px;"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span>' + '<span style="color: gray; font-size: 14px;"><br>' + time + '</span></div>'
+               newmessage =  '<div class="userclass" style="float: right; background-color: #D1EEFC; border: 5px solid #D1EEFC; ">' + name + ':<span style="color: black; font-size: 20px;"><br>' +  text.replace(/@@?@@|@@/g, "<br>") + '</span>' + '<span style="color: gray; font-size: 14px;"><br>' + time + '</span></div>'
                $( ".msg-wrap" ).append(newmessage);
                console.log(text);
           }
@@ -94,7 +96,7 @@
                                         $( ".msg-wrap" ).append(newmessage);
                                    }
                               </script>
-                              
+
                     </div>
                </div>
                <br>

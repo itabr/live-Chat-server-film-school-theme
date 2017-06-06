@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <head>
-  <title>Page Title</title>
+  <title> #ChitChatCity </title>
+  {% load static %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static "/chat/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css" %}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -16,6 +18,15 @@ button{
      border-color: #db3236;
      color:#db3236;
 }
+
+tr.changepos:hover {
+    background-color: #ECF6EC;
+}
+
+tr.changeneg:hover {
+    background-color: #FFF1F1;
+}
+
 </style>
 <body>
      <div style=" margin: 10px; border: 3px solid; border-radius: 10px; min-height: 400px;">
@@ -36,114 +47,114 @@ button{
                <h3> Choose the ChatRoom you want to join :</h3>
                </div>
                <div>
-                    <div style="width: 725px;">
+                    <div style="width: 1000px;">
                          <a href="../Action/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Action</h4>
                               </div>
                          </a>
                          <a href="../Adventure/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Adventure</h4>
                               </div>
                          </a>
                          <a href="../Animation/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Animation</h4>
                               </div>
                          </a>
                          <a href="../Biography/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Biography</h4>
                               </div>
                          </a>
                          <a href="../Comedy/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Comedy</h4>
                               </div>
                          </a>
                          <a href="../Crime/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Crime</h4>
                               </div>
                          </a>
                          <a href="../Documentary/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Documentary</h4>
                               </div>
                          </a>
                          <a href="../Drama/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Drama</h4>
                               </div>
                          </a>
                          <a href="../Family/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Family</h4>
                               </div>
                          </a>
                          <a href="../Fantasy/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Fantasy</h4>
                               </div>
                          </a>
                          <a href="../FilmNoir/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">FilmNoir</h4>
                               </div>
                          </a>
                          <a href="../History/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">History</h4>
                               </div>
                          </a>
                          <a href="../Horror/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Horror</h4>
                               </div>
                          </a>
                          <a href="../Music/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Music</h4>
                               </div>
                          </a>
                          <a href="../Musical/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Musical</h4>
                               </div>
                          </a>
                          <a href="../Mystery/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Mystery</h4>
                               </div>
                          </a>
                          <a href="../Romance/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Romance</h4>
                               </div>
                          </a>
                          <a href="../SciFic/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">SciFic</h4>
                               </div>
                          </a>
                          <a href="../Sport/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Sport</h4>
                               </div>
                          </a>
                          <a href="../Thriller/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Thriller</h4>
                               </div>
                          </a>
                          <a href="../War/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">War</h4>
                               </div>
                          </a>
                          <a href="../Western/{{uname}}">
-                              <div style=" float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
+                              <div style="text-align: center; width: 130px; float: left; margin: 10px 10px 10px 0px; border: 3px solid; border-radius: 10px;">
                                    <h4 style="margin: 5px">Western</h4>
                               </div>
                          </a>
@@ -152,7 +163,7 @@ button{
           </div>
 
           <div  style="clear: both; margin:10px; padding-top: 10px;">
-               <h3> Click on user to start private converstation</h3>
+               <h3> Click on user to start private conversation</h3>
                <div id="all-users" class="all-users" style="font-size: 18px;">
                </div>
                <script>
@@ -243,40 +254,60 @@ button{
                       return hexStr;
                     }
 
-                    function sortlist(l1){
-                         console.log(l1)
+
+                    function compare2(a,b) {
+                      if (a.value < b.value)
+                        return -1;
+                      if (a.value > b.value)
+                        return 1;
+                      return 0;
                     }
 
                     var myself = JSON.parse("{{myself|escapejs}}")[0];
 
                     var all_users = JSON.parse("{{all_user|escapejs}}");
-                    var str = "";
-                    uname = "{{uname}}";
-                    document.getElementById("all-users").innerHTML = "";
 
                     newlist = []
 
                     for(i=0; i<all_users.length; i++){
-                         compare(myself,all_users[i])
-                         newlist.push(all_users[i])
+                         value = compare(myself,all_users[i])
+                         all_users[i]['value'] = value
                     }
 
-                    sortlist(newlist)
+                    all_users = all_users.sort(compare2).reverse() ;
+
+                    uname = "{{uname}}";
+                    document.getElementById("all-users").innerHTML = "";
+
+
+                    var str = "<table class='table'><thead><tr><th>Status</th><th>Name</th><th>School</th><th style ='text-align: center;' > Interest Ratio </th></tr></thead><tbody>";
 
                     for(i=0; i<all_users.length; i++){
 
                          new_uname = all_users[i]["fields"]["user_name"];
                          first_name = all_users[i]["fields"]["first_name"];
                          last_name = all_users[i]["fields"]["last_name"];
+                         school = all_users[i]["fields"]["school"];
+                         value = all_users[i]["value"];
+                         console.log(all_users[0])
                          state = parseInt(all_users[i]["fields"]["state"]);
 
                          if(state){
-                              str = str + "<a href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'><li style='color: #3cba54;'>" + first_name + " " + last_name + "</li>";
+                              str = str + "<tr class='changepos'><td>" + '<i class="fa fa-smile-o fa-2x" aria-hidden="true" style="color: #3cba54;"></i></td>'
+                              str = str + "<td>" + "<a style='text-decoration: none; color: black;' href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'>" + "<div>" + " " + first_name + " " + last_name + "</div></td></a>";
+                              str = str + "<td>" + "<a style='text-decoration: none; color: black;' href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'>" + "<div>" + school + "</div></td></a>";
+                              str = str + "<td>" + "<a style='text-decoration: none; color: black;' href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'>" + "<div align='center'>" + value + "</div></td></a></tr>";
                          }
                          else{
-                              str = str + "<a href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'><li style='color: #db3236;'>" + first_name + " " + last_name + "</li>";
+                              str = str + "<tr class='changeneg'><td>" + '<i class="fa fa-frown-o fa-2x" aria-hidden="true" style="color: #db3236;"></i></td>'
+                              str = str + "<td>" + "<a style='text-decoration: none; color: black;' href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'>" + "<div>" + " " + first_name + " " + last_name + "</div></td></a>";
+                              str = str + "<td>" + "<a style='text-decoration: none; color: black;' href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'>" + "<div>" + school + "</div></td></a>";
+                              str = str + "<td>" + "<a style='text-decoration: none; color: black;' href='../private/" + addHexColor(toHex(new_uname),toHex(uname)) + "/" + uname + "/" + "'>" + "<div align='center'>" + value + "</div></td></a></tr>";
                          }
+
                     }
+
+                    str = str + '</tbody></table>'
 
                     document.getElementById("all-users").innerHTML = str;
                </script>

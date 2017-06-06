@@ -1,9 +1,13 @@
 <!doctype html>
 <html lang="en">
-<link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <head>
+       {% load static %}
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+       <link rel="stylesheet" href="{% static "/chat/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css" %}">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <meta charset="utf-8">
     <title>ChitChat</title>
   </head>
@@ -25,16 +29,16 @@
     #login {
         width: 400px;
         float: left;
-        height: 250px;
-        border: 3px solid #e7e7e7;
+        height: 290px;
+        border: 3px solid #A3CCFF;
         border-radius: 6px;
         margin: auto;
     }
     #signup {
         width: 400px;
         float: left;
-        height: 620px;
-        border: 3px solid #e7e7e7;
+        height: 890px;
+        border: 3px solid #A3CCFF;
         border-radius: 6px;
         margin: auto;
     }
@@ -80,7 +84,7 @@
     }
 
     .button1:hover {
-        background-color: #e7e7e7;
+        background-color: #A3CCFF;
         color: white;
     }
 
@@ -91,6 +95,27 @@
         position: fixed;
         float: left;
        }
+
+
+input[type=text], select {
+    width: 300px;
+    padding: 10px;
+    margin: 10px 50px 10px 50px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 300px;
+    padding: 10px;
+    margin: 10px 50px 10px 50px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 
   </style>
 
@@ -205,7 +230,7 @@
 
   <body>
       <div id="header">
-        <h1 style="min-width: 1000px;">Welcome to #ChitChatCity</h1>
+        <h1 style="width: 1000px;">Welcome to #ChitChatCity</h1>
       </div>
       <br>
       <div id="container" style="min-width: 1000px;">
@@ -213,15 +238,15 @@
           <div>
                <form id="login" method="POST">
                     {% csrf_token %}
-                    <h1 style="text-align: center;"> Login </h1>
-                         <div class="container">
+                    <h2 style="text-align: center;"> Login </h2>
+                    <br>
+                         <div>
                                    <input class="fillin" type="text" placeholder="Username" name="uname" required>
                                    <br>
                                    <input class="fillin" type="password" placeholder="Password" name="psw" required>
                                    <br>
                                    <button class="button button1" type="submit">Login</button>
                     </div>
-                    <br>
                     <br>
                     <br>
                     <br>
@@ -238,8 +263,9 @@
           <div>
             <form id="signup" method="POST">
               {% csrf_token %}
-              <h1 style="text-align: center"> Sign up </h1>
-              <div class="container">
+              <h2 style="text-align: center"> Sign up </h2>
+              <br>
+              <div>
                   <input id="first_name" class="fillin" type="text" placeholder="First name" name="fname" required>
                   <br><input id="last_name" class="fillin" type="text" placeholder="Last name" name="lname" required>
                   <br><input id="user_name" class="fillin" type="text" placeholder="Username" name="uname" required>
@@ -247,9 +273,9 @@
                   <br><input id="email" class="fillin" type="text" placeholder="Email" name="email" required>
                   <br><input id="school" class="fillin" type="text" placeholder="School name" name="school" required>
                   <br><input style="display:none;" id="location_vali" onclick="getLocation()" class="fillin" type="text" placeholder="location" name="location" required>
-                  <div>
+                  <div style=" padding: 10px;">
                   <p style="font-weight: bold;"> Choose all movie genres you are interested in :</p>
-                  <table>
+                  <table class="table">
                     <tr>
                     <td><input id="Action" type="checkbox" name="Action"> Action</td>
                     <td><input id="Adventure" type="checkbox" name="Adventure"> Adventure</td>
@@ -291,7 +317,7 @@
                     <td></td>
                     </tr>
                   </table>
-                  <br><button class="button button1" type="submit" onclick="getdata()" >submit</button>
+                  <button class="button button1" type="submit" onclick="getdata()" >submit</button>
                   </div>
                 </div>
             </form>
