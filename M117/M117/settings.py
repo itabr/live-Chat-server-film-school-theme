@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_m117',
         'USER': 'root',
-        'PASSWORD': 'samir1',
+        'PASSWORD': '*******',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
@@ -139,11 +139,3 @@ CHANNEL_LAYERS = {
     },
 }
 STATIC_URL = '/static/'
-
-# database
-# m117
-# mypassword
-
-# super user
-# admin
-# mypassword
